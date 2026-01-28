@@ -1,1 +1,1 @@
-Sukure Tomexo youtubee @elryklys Kad paleistumete zaidima atidarykite index.html
+Sukure Tomexo youtubee @elryklys Kad paleistumete zaidima parsisiuskite visus failus ir idekite i folderi kuri sukursite pavadinkite jy betkaip ir bus baigta tada paleiskite index.html file ir zaiskite!
