@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PINIGĖNAI — Miestelio Legenda</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="bgGlow"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">₿</div>
+      <div class="brandText">
+        <div class="title">PINIGĖNAI</div>
+        <div class="subtitle">Miestelio Legenda — misijos, istorija, pinigai</div>
+      </div>
+    </div>
+
+    <div class="topActions">
+      <button class="btn ghost" id="btnSave">💾 Save</button>
+      <button class="btn ghost" id="btnReset">🧨 Reset</button>
+      <button class="btn ghost" id="btnHelp">❔ Help</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel stats">
+      <div class="panelHeader">
+        <div class="panelTitle">📊 Statistika</div>
+        <div class="pill" id="pillDay">Diena 1</div>
+      </div>
+
+      <div class="statGrid">
+        <div class="statCard">
+          <div class="statLabel">Pinigai</div>
+          <div class="statValue" id="money">0 €</div>
+          <div class="statHint" id="moneyHint">uždirbk, investuok, augink!</div>
+        </div>
+
+        <div class="statCard">
+          <div class="statLabel">Bankas</div>
+          <div class="statValue" id="bank">0 €</div>
+          <div class="statHint">palūkanos kas dieną</div>
+        </div>
+
+        <div class="statCard">
+          <div class="statLabel">Reputacija</div>
+          <div class="statValue" id="rep">0</div>
+          <div class="statHint">atrakina misijas</div>
+        </div>
+
+        <div class="statCard">
+          <div class="statLabel">Energija</div>
+          <div class="statValue" id="energy">100</div>
+          <div class="statHint">reikia darbams</div>
+        </div>
+
+        <div class="statCard">
+          <div class="statLabel">Įgūdžiai</div>
+          <div class="statValue" id="skill">0</div>
+          <div class="statHint">geresni darbai</div>
+        </div>
+
+        <div class="statCard">
+          <div class="statLabel">Šešėlis</div>
+          <div class="statValue" id="heat">0%</div>
+          <div class="statHint">policija seka</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="quickActions">
+        <button class="btn primary" id="btnWork">🧰 Dirbti</button>
+        <button class="btn" id="btnRest">🛌 Poilsis</button>
+        <button class="btn" id="btnNextDay">🌙 Kita diena</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="inventory">
+        <div class="panelTitle">🎒 Inventorius</div>
+        <div class="invList" id="inventoryList"></div>
+      </div>
+    </aside>
+
+    <section class="panel center">
+      <div class="tabs">
+        <button class="tab active" data-tab="story">📜 Istorija</button>
+        <button class="tab" data-tab="missions">🧭 Misijos</button>
+        <button class="tab" data-tab="shop">🛒 Shop</button>
+        <button class="tab" data-tab="bank">🏦 Bankas</button>
+        <button class="tab" data-tab="street">🕶️ Gatvė</button>
+      </div>
+
+      <div class="tabBody active" id="tab-story">
+        <div class="bigTitle">📜 Miestelio Legenda</div>
+        <div class="storyBox" id="storyBox"></div>
+
+        <div class="storyActions">
+          <button class="btn primary" id="btnStoryNext">➡️ Tęsti</button>
+          <button class="btn ghost" id="btnStorySkip">⏩ Skip</button>
+        </div>
+      </div>
+
+      <div class="tabBody" id="tab-missions">
+        <div class="bigTitle">🧭 Misijos</div>
+        <div class="hint">
+          Misijos duoda pinigų, reputacijos ir atrakina naujas istorijos dalis.
+        </div>
+        <div class="missionList" id="missionList"></div>
+      </div>
+
+      <div class="tabBody" id="tab-shop">
+        <div class="bigTitle">🛒 Shop</div>
+        <div class="hint">Pirk daiktus, kurie didina uždarbį, mažina heat arba duoda bonusus.</div>
+        <div class="shopGrid" id="shopGrid"></div>
+      </div>
+
+      <div class="tabBody" id="tab-bank">
+        <div class="bigTitle">🏦 Bankas</div>
+        <div class="bankBox">
+          <div class="bankRow">
+            <div class="bankLabel">Turima banke:</div>
+            <div class="bankValue" id="bankBig">0 €</div>
+          </div>
+          <div class="bankRow">
+            <div class="bankLabel">Dienos palūkanos:</div>
+            <div class="bankValue" id="interest">+0.0%</div>
+          </div>
+
+          <div class="bankActions">
+            <input class="input" id="bankAmount" type="number" placeholder="Suma..." />
+            <button class="btn" id="btnDeposit">➕ Įnešti</button>
+            <button class="btn" id="btnWithdraw">➖ Išsiimti</button>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="bigTitle small">📈 Investicijos</div>
+          <div class="hint">Rizika = didesnis pelnas arba nuostolis.</div>
+          <div class="investGrid" id="investGrid"></div>
+        </div>
+      </div>
+
+      <div class="tabBody" id="tab-street">
+        <div class="bigTitle">🕶️ Gatvė</div>
+        <div class="hint">
+          Čia vyksta „greiti pinigai“. Bet atsargiai — kyla Heat (policijos dėmesys).
+        </div>
+
+        <div class="streetGrid">
+          <div class="streetCard">
+            <div class="streetTitle">🎲 Gatvės Deal</div>
+            <div class="streetDesc">Maža rizika, mažas pelnas.</div>
+            <button class="btn primary" id="btnStreetDeal">Daryti Deal</button>
+          </div>
+
+          <div class="streetCard">
+            <div class="streetTitle">🧨 „Didysis Triukas“</div>
+            <div class="streetDesc">Didelė rizika, didelis pelnas.</div>
+            <button class="btn danger" id="btnBigTrick">Bandyt Triuką</button>
+          </div>
+
+          <div class="streetCard">
+            <div class="streetTitle">🕵️ Sumažinti Heat</div>
+            <div class="streetDesc">Sumoki pinigų, kad „pamirštų“.</div>
+            <button class="btn" id="btnBribe">„Susitarti“</button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="bigTitle small">📰 Miestelio naujienos</div>
+        <div class="newsBox" id="newsBox"></div>
+      </div>
+    </section>
+
+    <aside class="panel log">
+      <div class="panelHeader">
+        <div class="panelTitle">🗒️ Veiksmai</div>
+        <div class="pill" id="pillAutosave">Autosave ON</div>
+      </div>
+
+      <div class="logBox" id="logBox"></div>
+
+      <div class="divider"></div>
+
+      <div class="achievements">
+        <div class="panelTitle">🏆 Achievements</div>
+        <div class="achList" id="achList"></div>
+      </div>
+    </aside>
+  </main>
+
+  <div class="modalBackdrop hidden" id="modalBackdrop">
+    <div class="modal">
+      <div class="modalHeader">
+        <div class="modalTitle" id="modalTitle">Title</div>
+        <button class="btn ghost" id="modalClose">✖</button>
+      </div>
+      <div class="modalBody" id="modalBody"></div>
+      <div class="modalActions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
